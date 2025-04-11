@@ -1,54 +1,91 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Проект React с использованием Redux
 
-Currently, two official plugins are available:
+## Описание проекта
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+В данном проекте была произведена миграция с использования `useContext` на `Redux` для управления состоянием приложения. Это позволило улучшить масштабируемость и читаемость кода, а также упростить управление состоянием в более сложных сценариях.
 
-## Expanding the ESLint configuration
+## Установленные зависимости
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+Для работы с Redux были установлены следующие зависимости:
+- `react`: библиотека для создания пользовательских интерфейсов.
+- `redux`: библиотека для управления состоянием.
+- `react-redux`: интеграция Redux с React.
+- `@reduxjs/toolkit`: упрощённая настройка Redux.
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Установка зависимостей
+
+Для установки зависимостей используйте пакетный менеджер `npm` или `yarn`. Например, для установки с помощью `npm` выполните команду:
+
+```bash
+npm install react redux @reduxjs/toolkit
+```
+или с помощью `yarn`:
+
+```bash
+yarn add react redux @reduxjs/toolkit
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Установка проекта
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Чтобы установить и запустить проект, выполните следующие шаги:
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+1. Клонируйте репозиторий:
+   ```bash
+   git clone https://github.com/nuhzdenegnetu/r07
+   ```
+
+2. Перейдите в директорию проекта:
+   ```bash
+   cd r07
+   ```
+
+3. Установите зависимости:
+   ```bash
+   npm install
+   ```
+
+4. Запустите проект:
+   ```bash
+   npm start
+   ```
+
+## Структура проекта
+
+Проект организован следующим образом:
 ```
+r07/
+├── .idea/                  # Конфигурация IDE (WebStorm)
+├── node_modules/           # Установленные зависимости (npm/yarn)
+├── public/                 # Статические файлы (favicon, изображения и т.п.)
+├── src/                    # Основной исходный код приложения
+│   ├── assets/             # Медиа-ресурсы: изображения, иконки, стили
+│   ├── components/         # Компоненты React
+│   │   └── ComponentLevel1.tsx  # Пример компонента 1 уровня
+│   ├── redux/              # Redux-логика
+│   │   ├── slices/
+│   │   │   └── appSlice.ts     # Срез состояния приложения: пользователи, тема, и редьюсер `toggleTheme`
+│   │   └── store.ts           # Конфигурация Redux store
+│   ├── App.css              # Стили для App.tsx
+│   ├── App.tsx              # Корневой компонент React-приложения
+│   ├── index.css            # Глобальные стили
+│   ├── main.tsx             # Точка входа в приложение, подключение Redux и рендеринг React
+│   └── vite-env.d.ts        # Типы окружения для Vite
+├── .gitignore              # Исключения для Git
+├── eslint.config.js        # Конфигурация ESLint
+├── index.html              # HTML-шаблон приложения
+├── package.json            # Зависимости проекта и скрипты
+├── package-lock.json       # Зафиксированные версии зависимостей
+├── README.md               # Описание проекта (этот файл)
+├── tsconfig.app.json       # TypeScript конфиг для приложения
+├── tsconfig.json           # Общий TypeScript конфиг
+├── tsconfig.node.json      # TypeScript конфиг для Node-среды
+└── vite.config.ts          # Конфигурация Vite
+```
+
+## Основные изменения
+
+- Удалён контекст (`useContext`) и соответствующие провайдеры.
+- Добавлен Redux Toolkit для управления состоянием.
+- Созданы срезы (slices) для различных частей состояния.
+- Настроен `store` и подключён через `Provider` в корневом компоненте.
