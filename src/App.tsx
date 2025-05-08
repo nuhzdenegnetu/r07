@@ -1,11 +1,13 @@
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
 import ComponentLevel1 from './components/ComponentLevel1';
 
-function App() {
+const App = () => {
     return (
-        <>
-            <ComponentLevel1 />
-        </>
+        <Provider store={store}>
+            <ComponentLevel1/>
+        </Provider>
     );
-}
+};
 
 export default App;
